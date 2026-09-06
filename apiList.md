@@ -1,4 +1,4 @@
-# DevLinker APIs
+# Coherent APIs
 
 ## authRouter
 - POST /signup
@@ -12,14 +12,14 @@
 
 ## connectionRequestRouter
 - POST /request/send/interested/:userId
-- POST /request/send/ignore/:userId
-- POST /request/review/accepted/:requestId
-- POST /request/review/rejected/:requestId
+- POST /request/send/ignored/:userId
+- POST /request/review/:status/:requestId
 
 ## userRouter
 - GET /user/request/received
 - GET /user/connections
 - GET /user/feed - GETS you the profiles of other users on platform
+- GET /user/:id
 
 STATUS: interested, ignore, accepted, rejected
 
@@ -32,36 +32,6 @@ STATUS: interested, ignore, accepted, rejected
 /feed?page=3&limit=10 => 21-30 => .skip(20) & .limit(10)
 
 FORMULA OF SKIP: skip = (page-1) * limit
-
-## paymentRouter
-
-### Create Payment
-- POST /payment/create
-    Protected by userAuth
-    Creates a Razorpay order for the selected membership
-    Stores the payment/order details in MongoDB
-    Returns the Razorpay keyId and order details to the frontend
-
-### Payment Webhook
-- POST /payment/webhook
-    Receives payment events from Razorpay
-    Verifies the Razorpay webhook signature
-    Updates payment status in the database
-
-- On payment.captured:
-    Sets user.isPremium = true
-    Saves the selected membership type
-    Calculates membership expiry date
-    Silver → 2 months
-    Gold → 6 months
-
-- On payment.failed:
-    Updates payment status to failed
-
-## Verify Payment / User Premium Status
-- GET /payment/verify
-    Protected by userAuth
-    Returns the logged-in user's data, including premium/membership information
 
 ## chatRouter
 - GET /chat/:toUserId — Fetches previous chat messages between the logged-in user and selected user from MongoDB

@@ -4,7 +4,11 @@ const Chat = require("../models/chat");
 const initializeSocket = (server) => {
   const io = socket(server, {
     cors: {
-      origin: "https://devlinker.tech",
+      origin: [
+        "http://localhost:5173",
+        "https://coherent.me",
+        "https://www.coherent.me",
+      ],
     },
   });
 
@@ -38,7 +42,7 @@ const initializeSocket = (server) => {
           text,
         });
         await chat.save();
-        io.to(roomId).emit("messageReceived", { firstName, text });
+        io.to(roomId).emit("messageReceived", { senderId: userId, firstName, text });
         
       } catch (err) {
         console.log(err);

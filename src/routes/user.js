@@ -40,13 +40,14 @@ userRouter.get("/user/connections", userAuth, async (req,res) => {
             {path: "toUserId", select: USER_SAFE_DATA},
         ]);
 
-        const data = connections.map((row) => {
-            if(row.toUserId._id.equals(loggedInUser._id)){
-                return row.fromUserId;
-            } else {
+        const data = connections
+            .filter((row) => row.fromUserId && row.toUserId)
+            .map((row) => {
+                if(String(row.toUserId._id) === String(loggedInUser._id)){
+                    return row.fromUserId;
+                }
                 return row.toUserId;
-            }
-        });
+            });
 
         res.json({
             message: "Connections fetched successfully",
@@ -90,6 +91,18 @@ userRouter.get("/feed", userAuth, async (req,res) => {
         res.send(users); 
     } catch(err){
         res.status(400).json({ message: err.message});
+    }
+});
+
+userRouter.get("/user/:id", userAuth, async (req,res) => {
+    try{
+        const user = await User.findById(req.params.id).select(USER_SAFE_DATA);
+        if(!user){
+            return res.status(404).json({message: "User not found"});
+        }
+        res.json(user);
+    } catch(err){
+        res.status(400).json({message: err.message});
     }
 });
 
