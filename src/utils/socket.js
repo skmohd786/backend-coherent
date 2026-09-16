@@ -6,9 +6,11 @@ const initializeSocket = (server) => {
     cors: {
       origin: [
         "http://localhost:5173",
+        "https://fronted-coherent-two.vercel.app",
         "https://coherent.me",
         "https://www.coherent.me",
       ],
+      credentials: true,
     },
   });
 

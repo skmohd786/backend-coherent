@@ -8,14 +8,16 @@ const http = require("http");
 
 require("dotenv").config();
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://fronted-coherent-two.vercel.app",
+    "https://coherent.me",
+    "https://www.coherent.me",
+].filter(Boolean);
+
 app.use(
     cors({
-        origin: [
-            "http://localhost:5173",
-            "https://fronted-coherent-two.vercel.app",
-            "https://coherent.me",
-            "https://www.coherent.me",
-        ],
+        origin: allowedOrigins,
         credentials: true,
     })
 );
@@ -38,6 +40,9 @@ app.use("/", chatRouter);
 const server = http.createServer(app);
 initializeSocket(server);
 
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok" });
+});
 
 // GET user by email
 app.get("/user", async (req,res) => {
@@ -111,13 +116,11 @@ app.patch("/user", async (req,res) => {
     }
 });
 
+const port = process.env.PORT || 7777;
+server.listen(port, "0.0.0.0", () => {
+    console.log(`Server is successfully listening on port ${port}...`);
+});
+
 connectDB()
-    .then(() => {
-        console.log("Database connection established...");
-        server.listen(7777, ()=> {
-            console.log("Server is successfully listening on port 7777... ");
-        });
-    })
-    .catch((err) => {
-        console.log("Database cannot be connected!");
-    });
+    .then(() => console.log("Database connection established..."))
+    .catch((err) => console.error("Database cannot be connected:", err.message));
