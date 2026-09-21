@@ -1,4 +1,4 @@
-# Coherent APIs
+# Cohorent APIs
 
 ## authRouter
 - POST /signup

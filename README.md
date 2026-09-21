@@ -1,6 +1,6 @@
-# 🔗 Coherent Backend
+# 🔗 Cohorent Backend
 
-Backend API for **Coherent**, a full-stack developer networking platform where developers can discover other developers, build connections, communicate in real time, and access premium membership features.
+Backend API for **Cohorent**, a full-stack developer networking platform where developers can discover other developers, build connections, communicate in real time, and access premium membership features.
 
 🌐 **Live Application:** https://coherent.me
 
@@ -8,7 +8,7 @@ Backend API for **Coherent**, a full-stack developer networking platform where d
 
 ## 📌 About
 
-**Coherent Backend** is built using **Node.js**, **Express.js**, and **MongoDB Atlas**. It provides REST APIs for authentication, profile management, developer discovery, connection requests, connections, real-time chat, and premium memberships.
+**Cohorent Backend** is built using **Node.js**, **Express.js**, and **MongoDB Atlas**. It provides REST APIs for authentication, profile management, developer discovery, connection requests, connections, real-time chat, and premium memberships.
 
 The backend follows a modular architecture and uses **JWT authentication with HTTP-only cookies** for secure authentication and protected API access.
 
@@ -92,7 +92,7 @@ The backend follows a modular architecture and uses **JWT authentication with HT
 
 ### 💎 Premium Membership
 
-Coherent supports Silver and Gold membership plans.
+Cohorent supports Silver and Gold membership plans.
 
 #### Silver Membership
 
