@@ -10,18 +10,20 @@ const http = require("http");
 require("dotenv").config();
 
 const allowedOrigins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://fronted-cohorent-two.vercel.app",
-    "https://cohorent.me",
-    "https://www.cohorent.me",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "https://fronted-coherent-two.vercel.app",
+  "https://coherent.me",
+  "https://www.coherent.me",
 ].filter(Boolean);
 
 app.use(
-    cors({
-        origin: allowedOrigins,
-        credentials: true,
-    })
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+  })
 );
 app.use(express.json({ limit: "2mb" }));
 app.use(cookieParser());       // middleware used to parse the token/JWT from the cookie
