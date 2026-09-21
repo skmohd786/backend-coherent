@@ -2,7 +2,7 @@
 
 Backend API for **Cohorent**, a full-stack developer networking platform where developers can discover other developers, build connections, communicate in real time, and access premium membership features.
 
-🌐 **Live Application:** https://coherent.me
+🌐 **Live Application:** https://cohorent.me
 
 ## 🧪 Interview Demo Data
 
