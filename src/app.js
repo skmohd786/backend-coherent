@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const User = require("./models/user");
 const connectDB = require("./config/database");
+const seedDemoData = require("./config/seedDemoData");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const http = require("http");
@@ -10,6 +11,7 @@ require("dotenv").config();
 
 const allowedOrigins = [
     "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://fronted-cohorent-two.vercel.app",
     "https://cohorent.me",
     "https://www.cohorent.me",
@@ -21,7 +23,7 @@ app.use(
         credentials: true,
     })
 );
-app.use(express.json());       //  built-in middleware used to convert incoming json data into js object
+app.use(express.json({ limit: "2mb" }));
 app.use(cookieParser());       // middleware used to parse the token/JWT from the cookie
 
 const authRouter = require("./routes/auth");
@@ -122,5 +124,8 @@ server.listen(port, "0.0.0.0", () => {
 });
 
 connectDB()
-    .then(() => console.log("Database connection established..."))
+    .then(async () => {
+        console.log("Database connection established...");
+        await seedDemoData();
+    })
     .catch((err) => console.error("Database cannot be connected:", err.message));

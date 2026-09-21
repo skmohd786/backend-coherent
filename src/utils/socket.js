@@ -6,6 +6,7 @@ const initializeSocket = (server) => {
     cors: {
       origin: [
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "https://fronted-cohorent-two.vercel.app",
         "https://cohorent.me",
         "https://www.cohorent.me",

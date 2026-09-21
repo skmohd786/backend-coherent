@@ -94,6 +94,17 @@ userRouter.get("/feed", userAuth, async (req,res) => {
     }
 });
 
+userRouter.get("/user/discover", userAuth, async (req,res) => {
+    try{
+        const users = await User.find({ _id: { $ne: req.user._id } })
+            .select(USER_SAFE_DATA)
+            .limit(50);
+        res.json(users);
+    } catch(err){
+        res.status(400).json({ message: err.message });
+    }
+});
+
 userRouter.get("/user/:id", userAuth, async (req,res) => {
     try{
         const user = await User.findById(req.params.id).select(USER_SAFE_DATA);

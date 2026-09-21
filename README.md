@@ -4,6 +4,21 @@ Backend API for **Cohorent**, a full-stack developer networking platform where d
 
 🌐 **Live Application:** https://coherent.me
 
+## 🧪 Interview Demo Data
+
+Set `SEED_DEMO_DATA=true` in `.env` before starting the backend. Startup creates
+four repeatable developer accounts and relationship data without duplicating
+records.
+
+Demo login:
+
+- Email: `demo.alex@coherent.dev`
+- Password: `Demo@12345`
+
+Alex has one accepted connection for chat, one incoming request to review, and
+other developers available in the discovery feed. The seed is opt-in so normal
+deployments do not create demo accounts unless explicitly enabled.
+
 ---
 
 ## 📌 About

@@ -27,7 +27,18 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req,res) 
             ],
         });
         if(existingConnectionRqst){
-            return res.status(400).send("Connection Request Already Exists!!!");
+            if(["ignored", "rejected"].includes(existingConnectionRqst.status) && status === "interested"){
+                existingConnectionRqst.status = status;
+                const updatedRequest = await existingConnectionRqst.save();
+                return res.json({
+                    message: `${req.user.firstName} showed interest in ${toUser.firstName}`,
+                    data: updatedRequest,
+                });
+            }
+            return res.json({
+                message: `This developer is already marked as ${existingConnectionRqst.status}`,
+                data: existingConnectionRqst,
+            });
         }
 
         const connectionRequest = new connectionRequestModel({

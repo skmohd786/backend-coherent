@@ -69,7 +69,7 @@ const userSchema = new mongoose.Schema(
     },
     photoURL: {
       type: String,
-      default: "http://defaultprofileimage.jpg",
+      default: "/Cohorent-logo.png",
     },
     about: {
       type: String,
